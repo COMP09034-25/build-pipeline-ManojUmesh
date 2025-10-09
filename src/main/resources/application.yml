@@ -1,6 +1,8 @@
 spring:
-    application:
-        name: catalog_service
+  profiles:
+    active: dev
+  application:
+    name: catalog_service
 
 management:
     endpoints:
@@ -13,9 +15,6 @@ server:
     tomcat:
         connection-timeout: 2s
         keep-alive-timeout: 15s
-    threads:
-      max: 50
-      min-spare: 5
 
 atu:
   greeting: Welcome to the local book catalog!
