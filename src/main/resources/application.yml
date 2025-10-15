@@ -1,8 +1,10 @@
 spring:
-  profiles:
-    active: dev
+  #profiles:
+    #active: dev
   application:
-    name: catalog_service
+    name: catalog-service
+  config:
+    import: "configserver:http://localhost:8888"
 
 management:
     endpoints:
@@ -11,10 +13,8 @@ management:
                 include: health,info,metrics
 
 server:
-    port: 9001 
+    port: 9001
     tomcat:
         connection-timeout: 2s
         keep-alive-timeout: 15s
 
-atu:
-  greeting: Welcome to the local book catalog!
