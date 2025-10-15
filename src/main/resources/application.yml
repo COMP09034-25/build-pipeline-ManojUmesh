@@ -5,12 +5,20 @@ spring:
     name: catalog-service
   config:
     import: "configserver:http://localhost:8888"
+    rquest-connect-timeout: 5000 # 5 seconds to establish connection
+    request-read-timeout: 5000 # 5 seconds to read response
+    fail-fast: true # Fail startup if config server unreachable (recommended for production)
+    retry:
+      max-attempts: 6 # Total of 6 attempts (1 initial + 5 retries)
+      initial-interval: 1000 # Wait 1 second before first retry
+      max-interval: 2000 # Maximum wait between retries
+      multiplier: 1.1 # Increase wait time by 10% each retry (exponential backoff)
 
 management:
     endpoints:
         web:
             exposure:
-                include: health,info,metrics
+                include: health,info,metrics,refresh
 
 server:
     port: 9001
